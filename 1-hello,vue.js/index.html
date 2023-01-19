@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Hello World</title>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:title="message">
+            Para o mouse em cima.
+        </p>
+    </div>
+    
+    <div id="app2">
+        <p v-if="isVisible" >
+            {{message}}
+        </p>
+
+        <br>
+
+        <button v-on:click='toggle()'>Mostrar/Esconder</button> | <button v-on:dblclick="reverse()">Inverter</button>
+        <input type="text"  id="message" v-model="message" name="message" placeholder="Message">
+
+        <ul>
+            <li v-for="item in items" :key="item.id" :title="item.nome">{{ item.nome }}</li>
+        </ul>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <script>
+        // app = new Vue({
+        //     el: '#app',
+        //     data:{
+        //         message:'Foi carregado em' + new Date().toLocaleString()
+        //     }
+        // })
+
+        app = new Vue({
+            el: '#app2',
+            data: {
+                isVisible: true,
+                items: [
+                    {id:1, nome: "Item 1"},
+                    {id:2, nome: "Item 2"},
+                    {id:3, nome: "Item 3"},
+                ],
+                message: 'Iai galera'
+            },
+            methods: {
+                toggle: function(){
+                    this.isVisible = !this.isVisible;
+                },
+                reverse: function() {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+</html>
